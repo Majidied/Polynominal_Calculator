@@ -55,6 +55,7 @@ int poly_name_table_set(poly_name_table_t *pt, const char *name, int degree, dou
     pt->array[index] = new_node;
 
     return 0;
+}
 double poly_name_table_get(const poly_name_table_t *pt, const char *name, int degree) {
     unsigned long int index = poly_name_key_index(name, pt->size);
 
