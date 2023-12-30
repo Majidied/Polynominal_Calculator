@@ -17,9 +17,10 @@ poly_table_t *poly_table_create(unsigned long int size) {
     return pt;
 }
 
-unsigned long int poly_hash(string name) {
-    unsigned long int hash_value = 5381;
-    return (unsigned long int)name;
+unsigned long int poly_hash(int degree) {
+    // Simple hash function using the degree as the key
+    // You might need a more sophisticated hash function depending on your requirements
+    return (unsigned long int)degree;
 }
 
 unsigned long int poly_key_index(int degree, unsigned long int size) {
