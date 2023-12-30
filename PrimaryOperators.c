@@ -18,8 +18,6 @@ poly_name_table_t *poly_name_table_create(unsigned long int size) {
 }
 
 unsigned long int poly_name_hash(const char *name) {
-    // Simple hash function using the name as the key
-    // You might need a more sophisticated hash function depending on your requirements
     unsigned long int hash = 5381;
     int c;
 
@@ -56,9 +54,7 @@ int poly_name_table_set(poly_name_table_t *pt, const char *name, int degree, dou
     new_node->poly->next = pt->array[index];
     pt->array[index] = new_node;
 
-    return 0;  // You might want to handle errors differently
-}
-
+    return 0;
 double poly_name_table_get(const poly_name_table_t *pt, const char *name, int degree) {
     unsigned long int index = poly_name_key_index(name, pt->size);
 
@@ -70,7 +66,7 @@ double poly_name_table_get(const poly_name_table_t *pt, const char *name, int de
         current = current->next;
     }
 
-    return 0.0;  // Default coefficient if not found
+    return 0.0;
 }
 
 void poly_name_table_print(const poly_name_table_t *pt) {
