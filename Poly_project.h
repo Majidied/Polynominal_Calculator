@@ -34,6 +34,37 @@ typedef struct hash_table_s
 	hash_node_t **array;
 } hash_table_t;
 
+/*chno fhemt*/
+
+typedef struct quot_s
+{
+	int up;
+	int down;
+ } quot;
+
+typedef struct poly_node_s
+{
+	int pow;
+	quot coff;
+	poly_node_s *next;
+} poly_node_t;
+
+typedef struct hash_node_s
+{
+	int key;
+	char **poly_node_t;
+	struct hash_node_s *next;
+} hash_node_t;
+
+typedef struct hash_table_s
+{
+	unsigned long int size;
+	hash_node_t **array;
+} hash_table_t;
+
+
+
+/*end of chno fhemt*/
 hash_table_t *hash_table_create(unsigned long int size);
 unsigned long int hash_djb2(const unsigned char *str);
 unsigned long int key_index(const unsigned char *key, unsigned long int size);
