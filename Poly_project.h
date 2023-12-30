@@ -19,19 +19,6 @@ typedef struct poly_node_s
     struct poly_node_s *next;
 } poly_node_t;
 
-/**
- * struct poly_table_s - Polynomial table data structure
- *
- * @size: The size of the array
- * @array: An array of size @size
- * Each cell of this array is a pointer to the first node of a linked list,
- * because we want our PolynomialTable to use a Chaining collision handling
- */
-typedef struct poly_table_s
-{
-    unsigned long int size;
-    poly_node_t **array;
-} poly_table_t;
 
 /**
  * struct poly_name_node_s - Node of a polynomial with a name as a key
@@ -42,7 +29,7 @@ typedef struct poly_table_s
  */
 typedef struct poly_name_node_s
 {
-    char name[20];  // Assuming a maximum name length of 19 characters
+    char name[20];
     poly_node_t *poly;
     struct poly_name_node_s *next;
 } poly_name_node_t;
