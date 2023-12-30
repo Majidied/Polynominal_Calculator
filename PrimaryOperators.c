@@ -81,6 +81,8 @@ poly_node_t *create_polynome(char *name)
                 }
                 else
                     monome->coff.down = 1;
+                if (*name != 'x' || *name != 'X')
+                    monome->pow = 0;
             }
         }
         else if (*name == 'x' || *name == 'X')
@@ -89,7 +91,8 @@ poly_node_t *create_polynome(char *name)
                 monome->coff.up = 1;
             found_x = 1;
         }
-        name++;
+        else
+            name++;
     }
 }
 
@@ -133,22 +136,44 @@ void poly_name_table_print(const hash_table_t *pt, char *key)
     printf("%s :", key);
     while (!(*tmp))
     {
-        printf("%s", tmp[0]->cst->value + 1);
+        if ((*tmp)->coff.up)
+        {
+            printf("%d", (*tmp)->coff.up);
+            if ((*tmp)->coff.down != 1)
+                printf("/%d", (*tmp)->coff.down);
+        }
+        if ((*tmp)->pow)
+        {
+            printf("x");
+            if ((*tmp)->pow > 1)
+                printf("^%d", (*tmp)->pow);
+        }
     }
     printf("\n");
 }
 
-void poly_name_table_delete(hash_table_t *pt) {
-    for (size_t i = 0; i < pt->size; ++i) {
-        hash_node_t *current = pt->array[i];
-        while (current != NULL) {
-            hash_node_t *temp = current;
-            current = current->next;
-            free(temp->poly);
-            free(temp);
-        }
-    }
+void poly_set(hash_table_t *pt, char *key, char *new_name)
+{
+    size_t i = poly_name_key_index(key, pt->size);
+    poly_node_t **tmp = pt->array[i]->poly;
+    poly_node_t **p_tmp = pt->array[i]->poly;
+    poly_node_t *new = *tmp;
 
+    new = create_polynome(new_name);
+    p_tmp = &new;
+    free(tmp);
+}
+
+void poly_name_table_delete(hash_table_t *pt)
+{
+    for (size_t i = 0; i < pt->size; ++i)
+    {
+        hash_node_t *current = pt->array[i];
+        hash_node_t *temp = current;
+        current = current;
+        free(temp->poly);
+        free(temp);
+    }
     free(pt->array);
     free(pt);
 }
