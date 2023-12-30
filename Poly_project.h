@@ -6,40 +6,39 @@
 #include <string.h>
 
 /**
- * struct hash_node_s - Node of a hash table
+ * struct poly_node_s - Node of a polynomial
  *
- * @key: The key, string
- * The key is unique in the HashTable
- * @value: The value corresponding to a key
- * @next: A pointer to the next node of the List
+ * @degree: The degree of the term
+ * @coefficient: The coefficient of the term
+ * @next: A pointer to the next node of the Polynomial
  */
-typedef struct hash_node_s
+typedef struct poly_node_s
 {
-	char *key;
-	char *value;
-	struct hash_node_s *next;
-} hash_node_t;
+    int degree;
+    double coefficient;
+    struct poly_node_s *next;
+} poly_node_t;
 
 /**
- * struct hash_table_s - Hash table data structure
+ * struct poly_table_s - Polynomial table data structure
  *
  * @size: The size of the array
  * @array: An array of size @size
  * Each cell of this array is a pointer to the first node of a linked list,
- * because we want our HashTable to use a Chaining collision handling
+ * because we want our PolynomialTable to use a Chaining collision handling
  */
-typedef struct hash_table_s
+typedef struct poly_table_s
 {
-	unsigned long int size;
-	hash_node_t **array;
-} hash_table_t;
+    unsigned long int size;
+    poly_node_t **array;
+} poly_table_t;
 
-hash_table_t *hash_table_create(unsigned long int size);
-unsigned long int hash_djb2(const unsigned char *str);
-unsigned long int key_index(const unsigned char *key, unsigned long int size);
-int hash_table_set(hash_table_t *ht, const char *key, const char *value);
-char *hash_table_get(const hash_table_t *ht, const char *key);
-void hash_table_print(const hash_table_t *ht);
-void hash_table_delete(hash_table_t *ht);
+poly_table_t *poly_table_create(unsigned long int size);
+unsigned long int poly_hash(int degree);
+unsigned long int poly_key_index(int degree, unsigned long int size);
+int poly_table_set(poly_table_t *pt, int degree, double coefficient);
+double poly_table_get(const poly_table_t *pt, int degree);
+void poly_table_print(const poly_table_t *pt);
+void poly_table_delete(poly_table_t *pt);
 
 #endif
