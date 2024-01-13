@@ -33,6 +33,10 @@ unsigned long int poly_name_key_index(const char *name, unsigned long int size) 
 }
 
 int poly_name_table_set(poly_name_table_t *pt, const char *name, int degree, double coefficient) {
+    if (name == NULL) {
+        fprintf(stderr, "Error: Name is NULL\n");
+        return -1;
+    }
     unsigned long int index = poly_name_key_index(name, pt->size);
 
     poly_name_node_t *new_node = malloc(sizeof(poly_name_node_t));
