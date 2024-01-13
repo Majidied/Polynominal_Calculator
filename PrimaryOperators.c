@@ -36,10 +36,14 @@ size_t poly_key_index(const char *name, size_t size)
     return poly_hash(name) % size;
 }
 
-poly_node_t *create_polynome(char *name)
-{
-    poly_node_t *monome, *head;
-    int found_x;
+
+int poly_name_table_set(poly_name_table_t *pt, const char *name, int degree, double coefficient) {
+    if (name == NULL) {
+        fprintf(stderr, "Error: Name is NULL\n");
+        return -1;
+    }
+    unsigned long int index = poly_name_key_index(name, pt->size);
+
 
     monome = malloc(sizeof(poly_node_t));
     if (!monome)
