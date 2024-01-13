@@ -1,8 +1,8 @@
 #ifndef POLY_PROJECT_H
 #define POLY_PROJECT_H
 
-#include "libc.h"
 #include <stdlib.h>
+#include <io.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -38,7 +38,8 @@ void poly_set(hash_table_t *pt, char *key, char *new_name);
 size_t poly_hash(char *name);
 size_t poly_key_index(char *name, size_t size);
 void poly_table_set(hash_table_t *pt, char *name);
-void poly_table_print(hash_table_t *pt);
+void poly_table_print(hash_table_t *pt, char *key);
 void poly_table_delete(hash_table_t *pt);
+int findlen(int num);
 
 #endif
