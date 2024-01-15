@@ -37,6 +37,6 @@ size_t poly_key_index(char *name, size_t size);
 void poly_table_set(hash_table_t *pt, char *id, char *name);
 void poly_table_print(hash_table_t *pt, char *key);
 void poly_table_delete(hash_table_t *pt);
-int findlen(int num);
-
+void simplifyFraction(int *numerator, int *denominator);
+int findGCD(int a, int b);
 #endif

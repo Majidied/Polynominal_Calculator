@@ -38,32 +38,28 @@ size_t poly_key_index(char *name, size_t size)
     return poly_hash(name) % size;
 }
 
-poly_node_t *addTerm(poly_node_t *poly, poly_node_t *term)
-{
+poly_node_t *addTerm(poly_node_t *poly, poly_node_t *term) {
     poly_node_t *current = poly;
     poly_node_t *prev = NULL;
 
-    // Traverse the list to find the correct position
     while (current != NULL && current->pow > term->pow) {
         prev = current;
         current = current->next;
     }
 
-    // If a term with the same power already exists, combine coefficients
     if (current != NULL && current->pow == term->pow) {
-        current->coff.up += term->coff.up;
-        // Adjust any necessary cleanup for the new term (term is not used anymore)
+        current->coff.up = current->coff.up * term->coff.down + term->coff.up * current->coff.down;
+        current->coff.down *= term->coff.down;
+        simplifyFraction(&current->coff.up, &current->coff.down);
+
         free(term);
         return poly;
     }
 
-    // If prev is NULL, the new term has the highest power and should be the new head
     if (prev == NULL) {
         term->next = poly;
         return term;
     }
-
-    // Insert the new term at the correct position
     prev->next = term;
     term->next = current;
 
@@ -236,8 +232,14 @@ void displayPolynomial(const poly_node_t *poly)
                 printf("%d", abs(currentTerm->coff.up));
             }
 
+            
+
             if (currentTerm->coff.down != 1 && currentTerm->pow != 0)
             {
+                if (currentTerm->coff.up == 1)
+            {
+                printf("%d", currentTerm->coff.up);
+            }
                 printf("/%d", currentTerm->coff.down);
             }
 
