@@ -291,11 +291,11 @@ poly_node_t *inter_poly(poly_node_t *p1)
     return (inter);
 }
 
-int pow(int x, int p)
+int power(int x, int p)
 {
     if (p == 0)
         return (1);
-    return (x * pow(x, p - 1));
+    return (x * power(x, p - 1));
 }
 
 int eval_poly(poly_node_t *p1, int x)
@@ -304,7 +304,7 @@ int eval_poly(poly_node_t *p1, int x)
 
     while(p1)
     {
-        res += p1->coff.up / p1->coff.down * pow(x, p1->pow);
+        res += p1->coff.up / p1->coff.down * power(x, p1->pow);
         p1 = p1->next;
     }
     return (res);
