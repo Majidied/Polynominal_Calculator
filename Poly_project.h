@@ -40,5 +40,8 @@ void poly_table_delete(hash_table_t *pt);
 void simplifyFraction(int *numerator, int *denominator);
 int findGCD(int a, int b);
 poly_node_t *add_poly(poly_node_t *p1, poly_node_t *p2);
+poly_node_t *multiplication(hash_table_t *table, char *key1, char *key2);
+void displayPolynomial(const poly_node_t *poly);
+poly_node_t *addTerm(poly_node_t *poly, poly_node_t *term);
 
 #endif
