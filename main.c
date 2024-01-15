@@ -1,21 +1,25 @@
 #include "Poly_project.h"
+int main()
+{
+    // Create a polynomial hash table with a size of 10
+    hash_table_t *poly_table = poly_table_create(10);
 
-int main(){
-    char *buffer;
-    int i;
-    int size;
+    // Set polynomials in the table
+    poly_table_set(poly_table, "P", "  + 2X +3 - X^2");
+    poly_table_set(poly_table, "Q", "5 - X^2 + 2/3X^3");
 
-    buffer =malloc(256);
-    hash_table_t *table = poly_table_create(10);
-    while(0)
-    {
-        size = read(0, buffer, 256);
-        if (size >= 0)
-            buffer[size] = '\0';
-        if (strcmp(buffer,"EXIT\n")==0) break;
-        else if (strncmp(buffer, "LET ", 4) ==0)
-            poly_table_set(table, buffer + 4);
-        poly_table_print(table, "P");
-    }
-    poly_node_t *poly = create_polynome("=X+4");
+    // Print polynomials in the table
+    poly_table_print(poly_table, "P");
+    poly_table_print(poly_table, "Q");
+
+    // Update polynomial "P11"
+    poly_set(poly_table, "P", "2 + X^2");
+
+    // Print the updated polynomial
+    poly_table_print(poly_table, "P");
+
+    // Delete the polynomial hash table
+    poly_table_delete(poly_table);
+
+    return 0;
 }
