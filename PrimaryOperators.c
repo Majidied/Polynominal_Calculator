@@ -38,7 +38,8 @@ size_t poly_key_index(char *name, size_t size)
     return poly_hash(name) % size;
 }
 
-poly_node_t *addTerm(poly_node_t *poly, poly_node_t *term) {
+poly_node_t *addTerm(poly_node_t *poly, poly_node_t *term)
+{
     poly_node_t *current = poly;
     poly_node_t *prev = NULL;
 
@@ -65,7 +66,6 @@ poly_node_t *addTerm(poly_node_t *poly, poly_node_t *term) {
 
     return poly;
 }
-
 
 void parseNumber(const char *str, int *numerator, int *denominator)
 {
