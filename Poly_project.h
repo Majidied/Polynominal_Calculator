@@ -39,4 +39,6 @@ void poly_table_print(hash_table_t *pt, char *key);
 void poly_table_delete(hash_table_t *pt);
 void simplifyFraction(int *numerator, int *denominator);
 int findGCD(int a, int b);
+poly_node_t *add_poly(poly_node_t *p1, poly_node_t *p2);
+
 #endif

@@ -11,7 +11,6 @@ int main() {
     printf("Enter a string: ");
     while (1)
     {
-    
     if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
         // Allocate memory for cmd, key, and poly
         cmd = malloc(MAX_LENGTH);
