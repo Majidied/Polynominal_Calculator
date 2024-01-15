@@ -1,3 +1,5 @@
+#ifndef POLY_PROJECT_H
+#define POLY_PROJECT_H
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
