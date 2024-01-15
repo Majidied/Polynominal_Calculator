@@ -5,7 +5,7 @@ int main()
     hash_table_t *poly_table = poly_table_create(10);
 
     // Set polynomials in the table
-    poly_table_set(poly_table, "P", "  + 2X +3 - X^2");
+    poly_table_set(poly_table, "P", " 2 + 2X +3X^2 - X^2");
     poly_table_set(poly_table, "Q", "5 - X^2 + 2/3X^3");
 
     // Print polynomials in the table
