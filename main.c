@@ -33,6 +33,11 @@ int main() {
   char *key, *key2, *poly;
   hash_table_t *poly_table = poly_table_create(10);
 
+  printf("Polynomial Calculator\n");
+  printf("Version 1.0\n");
+  printf("Running on [WIN] [%d-bit]\n", sizeof(void *) * 8);
+  printf("Type 'HELP' for a list of available commands.\n");
+
   while (1) {
     printf(">>");
     if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
@@ -62,35 +67,38 @@ int main() {
       } else if (sscanf(buffer, "DISPLAY %s", key) == 1) {
         poly_table_print(poly_table, key);
       } else if (sscanf(buffer, "ADD %[^,],%[^ \n]", key, key2) == 2) {
-        printf("Key: %s\n", key);
-        printf("Key2: %s\n", key2);
+        poly_node_t *result = add_poly(poly_table, key, key2);
+        displayPolynomial(result);
       } else if (sscanf(buffer, "SUB %[^,],%[^ \n]", key, key2) == 2) {
-        printf("Key: %s\n", key);
-        printf("Key2: %s\n", key2);
+        poly_node_t *result = sub_poly(poly_table, key, key2);
+        displayPolynomial(result);
       } else if (sscanf(buffer, "MUL %[^,],%[^ \n]", key, key2) == 2) {
         poly_node_t *result = multiplication(poly_table, key, key2);
         displayPolynomial(result);
       } else if (sscanf(buffer, "POW %[^,],%[^ \n]", key, key2) == 2) {
-        if(integer(key2)){
-        int exp = atoi(key2);
-        poly_node_t *result = pow_poly(poly_table,key, exp);
-        displayPolynomial(result);
+        if (integer(key2)) {
+          int exp = atoi(key2);
+          poly_node_t *result = pow_poly(poly_table, key, exp);
+          displayPolynomial(result);
         } else {
-            printf("Invalid exponent '%s'. Exponent must be a non-negative integer.\n", key2);
+          printf("Invalid exponent '%s'. Exponent must be a non-negative "
+                 "integer.\n",
+                 key2);
         }
       } else if (sscanf(buffer, "AFFECT %[^,],%[^ \n]", key, key2) == 2) {
-        printf("Key: %s\n", key);
-        printf("Key2: %s\n", key2);
+        aff_poly(poly_table, key, key2);
       } else if (sscanf(buffer, "DER %s", key) == 1) {
-        printf("Key: %s\n", key);
+        poly_node_t *result = der_poly(poly_table, key);
+        displayPolynomial(result);
       } else if (sscanf(buffer, "INT %s", key) == 1) {
-        printf("Key: %s\n", key);
+        poly_node_t *result = inter_poly(poly_table, key);
+        displayPolynomial(result);
       } else if (sscanf(buffer, "EVAL %s for X=%s", key, key2) == 2) {
-        if(integer(key2)){
-        int exp = atoi(key2);
-        printf("Result: %d\n",eval_poly(poly_table,key, exp));
+        if (integer(key2)) {
+          float exp = atof(key2);
+          printf("Result: %.2f\n", eval_poly(poly_table, key, exp));
         } else {
-            printf("Invalid value for X='%s'. X must be a number.\n", key2);
+          printf("Invalid value for X='%s'. X must be a number.\n", key2);
         }
       } else if (strcasecmp(buffer, "HELP\n") == 0) {
         displayHelp();
