@@ -7,7 +7,7 @@ hash_table_t *poly_table_create(size_t size) {
   }
 
   pt->size = size;
-  pt->array = calloc(size, sizeof(hash_node_t *));
+  pt->array = calloc(size + 1, sizeof(hash_node_t *));
 
   if (pt->array == NULL) {
     perror("Failed to allocate memory for polynomial table array");
