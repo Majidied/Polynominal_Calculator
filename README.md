@@ -8,5 +8,5 @@ The program will then display the result of the operation.
 
 Please note that the program currently only supports polynomials with real coefficients. Additionally, it may not be able to handle very large or complex polynomials.
 
-We hope you find this program useful for your polynomial calculations. If you have any feedback or encounter any issues, please feel free to contact us at majidimajidi2003@gmail.com.
+We hope you find this program useful for your polynomial calculations. If you have any feedback or encounter any issues, please feel free to contact us at mohammedmajidi321@gmail.com.
 Thank you for using Calculator Polynomial!
